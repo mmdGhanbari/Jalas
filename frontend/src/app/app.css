@@ -1,0 +1,12 @@
+.app {
+  text-align: center;
+  background: #232931;
+  height: 100vh;
+  width: 100vw;
+}
+
+.body-container {
+  width: 100%;
+  height: calc(100% - 60px);
+  display: flex;
+}
