@@ -3,7 +3,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 // components
 import AppBar from './components/appBar/appBar'
-import SideBar from './components/sideBar/sideBar'
+import SideBar from './components/sideBar/sideBar.container'
 import Body from './components/body/body.container'
 // style
 import './app.css'

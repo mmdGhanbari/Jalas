@@ -60,8 +60,7 @@ export default ({
           <MyButton style={{ background: '#4ecca3' }} onClick={onCreate}>
             <p className='poll-actions-text iranyekan'>ایجاد جلسه</p>
           </MyButton>
-        ) : null}
-        {action === 'cancel' ? (
+        ) : action === 'cancel' ? (
           <div
             className='poll-actions-content'
             style={{ background: '#f6da63' }}

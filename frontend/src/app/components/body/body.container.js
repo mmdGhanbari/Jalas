@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Body from './body'
 
 const mapStateToProps = state => ({
-  polls: state.main.polls
+  page: state.view.app.page
 })
 
 export default connect(mapStateToProps)(Body)
