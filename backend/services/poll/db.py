@@ -10,9 +10,16 @@ db = client['jalas']
 def insertPoll(poll):
     db.poll.insert_one(poll)
 
+def getAll():
+    cursor = db.poll.find()
+    for x in cursor:
+        print("------------", x)
+    return
 
-def getPoll(userId, name):
-    cursor = db.poll.find({'userId': userId})
+
+
+def getPoll(name):
+    cursor = db.poll.find()
     for x in cursor:
         if x['name'] == name:
             print("------------", x)
