@@ -78,10 +78,10 @@ export default ({
           <div className='option'>
             <div className='option-votes'>
               <div className='option-positive option-vote iranyekan'>
-                <p>{toPersianNumber(positive)}</p>
+                <p>+{toPersianNumber(positive)}</p>
               </div>
               <div className='option-negative option-vote iranyekan'>
-                <p>{toPersianNumber(negative)}</p>
+                <p>-{toPersianNumber(negative)}</p>
               </div>
             </div>
             <Typography
