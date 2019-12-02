@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import pymongo
 import requests
 from requests.exceptions import Timeout
@@ -28,35 +28,43 @@ def requests_retry_session(
     session.mount('https://', adapter)
     return session
 
-@app.route('/api/getAvailableRooms/<start>/<end>')
+
+@app.route('/api/getAvailableRooms/<start>/<end>', methods=['GET'])
 def roomList(start, end):
     try:
-        req_url = 'http://213.233.176.40/available_rooms?start=start&end=end'
-        available_rooms = requests.get(req_url, timeout=5).content
-        return available_rooms
-    except Timeout as ex:
+        req_url = 'http://213.233.176.40/available_rooms?start=' + start + '&end=' + end
+        response = requests.get(req_url, timeout=5)
+        return response.content, response.status_code
+    except Timeout:
         return "Available List Timeout", 408
-    
-@app.route('/api/ReserveRoom/<roomNum>/<start>/<end>')
-def reserveRoom(roomNum, start, end):
+
+
+@app.route('/api/reserveRoom', methods=['POST'])
+def reserveRoom():
+    body = request.json
     userId = "PiedPipers"
-    reserveUrl = 'http://213.233.176.40/rooms/room_num/reserve'
-    data = {
-        "username" : userId,
-        "start" : start,
-        "end" : end
-    }
-    
-    t0 = time.time()
+
+    reserveUrl = 'http://213.233.176.40/rooms/' + \
+        str(body['roomNumber']) + '/reserve'
+    # data = {
+    #     "username": userId,
+    #     "start": body['start'],
+    #     "end": body['end']
+
+    # data = {
+    #     "username": "rkhosravi",
+    #     "start": "2019-09-13T19:00:00",
+    #     "end": "2019-09-13T20:00:00"
+    # }
     try:
-        response = requests_retry_session().post(reserveUrl, data=data)
+        response = requests.post(
+            'http://213.233.176.40/rooms/457/reserve', data={
+                "username": "rkhosravi",
+                "start": "2019-09-13T19:00:00",
+                "end": "2019-09-13T20:00:00"
+            })
+        return response.content, response.status_code
     except Exception as ex:
         print('It failed :(', ex.__class__.__name__)
     else:
         print('It eventually worked', response.status_code)
-    finally:
-        t1 = time.time()
-        print('Took', t1 - t0, 'seconds')
-
-
-    

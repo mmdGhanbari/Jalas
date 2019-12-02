@@ -10,12 +10,10 @@ db = client['jalas']
 def insertPoll(poll):
     db.poll.insert_one(poll)
 
+
 def getAll():
     cursor = db.poll.find()
-    for x in cursor:
-        print("------------", x)
-    return
-
+    return [x for x in cursor]
 
 
 def getPoll(name):
