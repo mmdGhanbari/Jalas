@@ -5,6 +5,7 @@ from requests.exceptions import Timeout
 import urllib.request
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
+import json
 
 app = Flask(__name__)
 
@@ -41,28 +42,25 @@ def roomList(start, end):
 
 @app.route('/api/reserveRoom', methods=['POST'])
 def reserveRoom():
-    body = request.json
-    userId = "PiedPipers"
+    # body = request.json
+    # userId = "PiedPipers"
 
-    reserveUrl = 'http://213.233.176.40/rooms/' + \
-        str(body['roomNumber']) + '/reserve'
+    # reserveUrl = 'http://213.233.176.40/rooms/' + \
+        # str(body['roomNumber']) + '/reserve'
     # data = {
     #     "username": userId,
     #     "start": body['start'],
     #     "end": body['end']
 
-    # data = {
-    #     "username": "rkhosravi",
-    #     "start": "2019-09-13T19:00:00",
-    #     "end": "2019-09-13T20:00:00"
-    # }
+    data = {
+        "start": "2019-09-13T19:00:00",
+        "end": "2019-09-13T20:00:00",
+        "username": "rkhosravi"
+    }
+    headers = {'Content-Type': 'application/json'}
+
     try:
-        response = requests.post(
-            'http://213.233.176.40/rooms/457/reserve', data={
-                "username": "rkhosravi",
-                "start": "2019-09-13T19:00:00",
-                "end": "2019-09-13T20:00:00"
-            })
+        response = requests.post('http://213.233.176.40/rooms/457/reserve', data=json.dumps(data), headers=headers)
         return response.content, response.status_code
     except Exception as ex:
         print('It failed :(', ex.__class__.__name__)
