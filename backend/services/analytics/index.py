@@ -3,8 +3,8 @@ from db import insertMeeting, updateMeeting
 from datetime import datetime
 app = Flask(__name__)
 
-@app.route('/api/getPoll/<userId>/<name>')
-def meetingStart(userId, name):
+@app.route('/api/insertEvent')
+def insertEvent():
     insertMeeting({
         'name': name,
         'userId': userId,
@@ -16,5 +16,6 @@ def meetingStart(userId, name):
     now = datetime.now()
     updateMeeting(userId, 'start', now)
 
+@app.route('api/')
 
     
