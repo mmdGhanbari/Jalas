@@ -11,12 +11,23 @@ const uidgen = new UIDGenerator()
 const makePoll = poll => ({
   ...poll,
   id: poll._id,
-  options: R.map(R.assoc('id', uidgen.generateSync()), poll.options)
+  options: R.map(
+    option =>
+      R.merge(option, {
+        id: uidgen.generateSync(),
+        startDate: new Date(option.start),
+        endDate: new Date(option.end)
+      }),
+    poll.options
+  )
 })
 
 export const getPolls = () =>
   get('/poll/api/getAllPolls')
-    .then(polls => dispatchSetPolls(R.map(makePoll, polls)))
+    .then(
+      res =>
+        console.log(res.data) || dispatchSetPolls(R.map(makePoll, res.data))
+    )
     .catch(console.log)
 
 export const updatePoll = (poll, startDate, endDate) =>

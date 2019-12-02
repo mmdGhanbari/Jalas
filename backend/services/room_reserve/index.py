@@ -62,3 +62,7 @@ def reserveRoom():
         print('It failed :(', ex.__class__.__name__)
     else:
         print('It eventually worked', response.status_code)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=3004)

@@ -1,12 +1,14 @@
-from flask import Flask, request
+import json
+from bson import json_util
+from flask import Flask, request, jsonify
 from db import insertPoll, getPoll, getUserPolls, getAll
 app = Flask(__name__)
 
 
 @app.route('/api/getAllPolls')
 def getAllPolls():
-    polls = str(getAll())
-    return polls
+    polls = getAll()
+    return json.dumps(polls, default=json_util.default)
 
 
 @app.route('/api/getPoll/<name>')
@@ -24,4 +26,8 @@ def getPollRouter(name):
 def insertPollRouter():
     poll = request.json
     insertPoll(poll)
-    return 'seccess'
+    return 'success'
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=3002)

@@ -1,5 +1,6 @@
 const express = require('express')
 const axios = require('axios')
+const cors = require('cors')
 
 const app = express()
 
@@ -12,6 +13,7 @@ const portMap = {
 }
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/:service/*', (req, res) => {
   const service = req.params.service

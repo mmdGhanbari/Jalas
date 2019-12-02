@@ -1,12 +1,12 @@
 const initialState = [
-  {
-    id: '111',
-    title: 'جلسه ۱',
-    userId: '111222333',
-    room: 803,
-    startDate: new Date(),
-    endDate: new Date()
-  }
+  // {
+  //   id: '111',
+  //   title: 'جلسه ۱',
+  //   userId: '111222333',
+  //   room: 803,
+  //   startDate: new Date(),
+  //   endDate: new Date()
+  // }
 ]
 
 const reducers = {

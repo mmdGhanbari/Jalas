@@ -3,10 +3,10 @@ from flask_mail import Mail, Message
 import pymongo
 
 app = Flask(__name__)
-mail=Mail(app)
+mail = Mail(app)
 
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'eileen.jamali@gmail.com'
 app.config['MAIL_PASSWORD'] = 'aylin1farzanegan'
@@ -14,15 +14,15 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
-@app.route("/api/reserveComplete", methods = ['POST'])
+
+@app.route("/api/reserveComplete", methods=['POST'])
 def sendEmail():
     data = request.json
-    msg = Message('Hello', sender = 'fatemeh.haghighi550@gmail.com',\
-     recipients = ['fatemeh.haghighi550@gmail.com'])
+    msg = Message('Hello', sender='fatemeh.haghighi550@gmail.com',
+                  recipients=['fatemeh.haghighi550@gmail.com'])
     msg.body = data
     mail.send(msg)
     return "Sent"
-
 
 
 # def getEmail(userId):
@@ -67,3 +67,6 @@ def sendEmail():
 #     mail.send(msg)
 #     return "done!"
 
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=3003)
