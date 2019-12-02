@@ -1,18 +1,10 @@
-from flask import Flask
+from flask import Flask, request
 from flask_mail import Mail, Message
 import pymongo
 
 app = Flask(__name__)
 mail=Mail(app)
-# app.config.update(dict(
-#     DEBUG = True,
-#     MAIL_SERVER = 'smtp.gmail.com',
-#     MAIL_PORT = 465,
-#     MAIL_USE_TLS = True,
-#     MAIL_USE_SSL = False,
-#     MAIL_USERNAME = 'eileen.jamali@gmail.com',
-#     MAIL_PASSWORD = 'aylin1farzanegan',
-# ))
+
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -22,12 +14,14 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
-@app.route("/")
-def index():
-   msg = Message('Hello', sender = 'fatemeh.haghighi550@gmail.com', recipients = ['fatemeh.haghighi550@gmail.com'])
-   msg.body = "Hello Flask message sent from Flask-Mail"
-   mail.send(msg)
-   return "Sent"
+@app.route("/api/reserveComplete", methods = ['POST'])
+def sendEmail():
+    data = request.json
+    msg = Message('Hello', sender = 'fatemeh.haghighi550@gmail.com',\
+     recipients = ['fatemeh.haghighi550@gmail.com'])
+    msg.body = data
+    mail.send(msg)
+    return "Sent"
 
 
 
