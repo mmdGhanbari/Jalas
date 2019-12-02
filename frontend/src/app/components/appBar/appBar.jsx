@@ -4,7 +4,7 @@ import React from 'react'
 import './appBar.css'
 
 export default () => (
-  <div className='app-bar'>
+  <div className='app-bar iranyekan'>
     <p>سامانه جلس</p>
     {/* <img src='images/meeting.jpg' alt='meeting' /> */}
   </div>

@@ -25,19 +25,19 @@ export default ({ page, setPage }) => (
       style={{ marginLeft: `${page === 'create' ? -15 : 15}px` }}
       onClick={Function.prototype}
     >
-      <p className='iranyekan side-bar-text'>ایجاد جلسه</p>
+      <p className='iranyekan side-bar-text'>ایجاد نظرسنجی</p>
     </MyButton>
     <MyButton
       style={{ marginLeft: `${page === 'polls' ? -15 : 15}px` }}
       onClick={() => setPage('polls')}
     >
-      <p className='iranyekan side-bar-text'>در حال نظرسنجی</p>
+      <p className='iranyekan side-bar-text'>نظرسنجی ها</p>
     </MyButton>
     <MyButton
       style={{ marginLeft: `${page === 'meetings' ? -15 : 15}px` }}
       onClick={() => setPage('meetings')}
     >
-      <p className='iranyekan side-bar-text'>نهایی شده</p>
+      <p className='iranyekan side-bar-text'>جلسه ها</p>
     </MyButton>
   </div>
 )

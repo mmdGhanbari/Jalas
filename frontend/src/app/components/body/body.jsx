@@ -2,7 +2,7 @@
 import React from 'react'
 // components
 import PollList from '../pollList/pollList.container'
-import MeetingList from '../meetingList/meetingList'
+import MeetingList from '../meetingList/meetingList.container'
 // style
 import './body.css'
 

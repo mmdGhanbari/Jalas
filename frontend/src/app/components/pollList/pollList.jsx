@@ -12,6 +12,6 @@ export default ({ polls }) =>
     </>
   ) : (
     <div className='no-meetings iranyekan'>
-      <p>جلسه ای وجود ندارد</p>
+      <p>نظرسنجی ای وجود ندارد</p>
     </div>
   )
