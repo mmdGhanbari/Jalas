@@ -1,21 +1,23 @@
-from flask import Flask
-from db import insertMeeting, updateMeeting
+from flask import Flask, request
+from db import insertEvent, getAll, reserveNumber, unsuccessMeeting
 from datetime import datetime
 app = Flask(__name__)
 
-@app.route('/api/insertEvent')
-def insertEvent():
-    insertMeeting({
-        'name': name,
-        'userId': userId,
-        'option': [
-            {'start': ''},
-            {'end': ''},
-        ]
-    })
-    now = datetime.now()
-    updateMeeting(userId, 'start', now)
+@app.route('/api/insertEvent', methods = ['POST'])
+def insertEventRouter():
+    event = request.json
+    insertEvent(event)
+    return
 
-@app.route('api/')
+@app.route('api/getAllEvent', methods = ['GET'])
+def getAllEventRouter():
+    return str(getAll())
 
+@app.route('api/getReserveNumber', methods = ['GET'])
+def getReserveNum():
+    return str(reserveNumber())
+
+@app.route('api/unsuccessMeeting', methods = ['GET'])
+def getUnsuccessMeeting():
+    return str(unsuccessMeeting())
     
