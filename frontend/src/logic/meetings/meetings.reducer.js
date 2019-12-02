@@ -1,8 +1,3 @@
-// modules
-import * as R from 'ramda'
-// redux
-import { getState } from '../../setup/redux'
-
 const initialState = [
   {
     id: '111',
@@ -14,7 +9,11 @@ const initialState = [
   }
 ]
 
-const reducers = {}
+const reducers = {
+  SET_MEETINGS: (_, meetings) => meetings,
+
+  INSERT_MEETING: (state, meeting) => [...state, meeting]
+}
 
 export default (state = initialState, { type, payload }) =>
   reducers[type] ? reducers[type](state, payload) : state

@@ -59,7 +59,9 @@ const reducers = {
     R.map(
       poll => (poll.id === updatedPoll.id ? { ...poll, ...updatedPoll } : poll),
       state
-    )
+    ),
+
+  SET_POLLS: (_, polls) => polls
 }
 
 export default (state = initialState, { type, payload }) =>

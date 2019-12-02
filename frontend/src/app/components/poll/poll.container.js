@@ -7,9 +7,10 @@ import {
   dispatchSetSelectedOption,
   dispatchSetSelectedRoom
 } from '../pollList/pollList.action'
-import { dispatchUpdatePoll } from '../../../logic/polls/polls.action'
 // views
 import { getPollById } from '../../../logic/polls/polls.reducer'
+// requests
+import { updatePoll } from '../../../logic/polls/polls.request'
 // redux
 import { getState } from '../../../setup/redux'
 
@@ -26,10 +27,15 @@ const mapStateToProps = (state, { id, status }) => {
 
 const mapDispatchToProps = (_, { id }) => ({
   onCreate: () => {
-    dispatchUpdatePoll({
-      id,
-      reservingRoom: getState().view.pollList.selectedRoom.number
-    })
+    const { startDate, endDate } = getState().view.pollList.selectedOption
+    updatePoll(
+      {
+        id,
+        reservingRoom: getState().view.pollList.selectedRoom.number
+      },
+      startDate,
+      endDate
+    )
     dispatchSetSelectedOption(null)
     dispatchSetSelectedRoom({})
   }
