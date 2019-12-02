@@ -1,0 +1,46 @@
+{
+  "apps": [
+    {
+      "name": "gateway",
+      "cwd": "./gateway/src",
+      "script": "index.js",
+      "exec_mode": "fork",
+      "instances": 1
+    },
+    {
+      "name": "meeting",
+      "cwd": "./services/meeting/src",
+      "script": "index.js",
+      "exec_mode": "fork",
+      "instances": 1
+    },
+    {
+      "name": "poll",
+      "cwd": "./services/poll",
+      "script": "python3 index.py",
+      "exec_mode": "fork",
+      "instances": 1
+    },
+    {
+      "name": "notification",
+      "cwd": "./services/notification",
+      "script": "python3 index.py",
+      "exec_mode": "fork",
+      "instances": 1
+    },
+    {
+      "name": "analytics",
+      "cwd": "./services/analytics",
+      "script": "python3 index.py",
+      "exec_mode": "fork",
+      "instances": 1
+    },
+    {
+      "name": "reserve",
+      "cwd": "./services/room_reserve",
+      "script": "python3 index.py",
+      "exec_mode": "fork",
+      "instances": 1
+    }
+  ]
+}

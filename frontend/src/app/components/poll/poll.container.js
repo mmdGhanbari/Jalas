@@ -30,7 +30,7 @@ const mapDispatchToProps = (_, { id }) => ({
   onCreate: () => {
     dispatchSetSnackbarMessage({
       type: 'success',
-      message: 'hey you !!'
+      message: 'با موفقیت ثبت شد !!'
     })
     const { startDate, endDate } = getState().view.pollList.selectedOption
     updatePoll(

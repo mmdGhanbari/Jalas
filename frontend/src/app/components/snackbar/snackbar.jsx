@@ -82,13 +82,13 @@ const AppSnackbar = ({ message, snackbarIsOpen, type, closeSnackbar }) => {
       onClose={closeSnackbar}
     >
       <SnackbarContent
-        className={`${classes[type]} ${classes.contentRoot}`}
+        className={`${classes[type]} ${classes.contentRoot} iranyekan`}
         aria-describedby='client-snackbar'
         message={
           <span
             className={classes.message}
             style={{
-              fontSize: 12,
+              fontSize: 15,
               fontWeight: 'bold',
               fontFamily: 'iranyekan',
               lineHeight: '21px',
