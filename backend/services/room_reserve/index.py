@@ -13,7 +13,7 @@ app = Flask(__name__)
 def requests_retry_session(
     retries=10,
     backoff_factor=0.3,
-    status_forcelist=(500, 502, 504, 408),
+    status_forcelist=(500, 502, 504, 408, 400, 404),
     session=None,
 ):
     session = session or requests.Session()
@@ -42,25 +42,21 @@ def roomList(start, end):
 
 @app.route('/api/reserveRoom', methods=['POST'])
 def reserveRoom():
-    # body = request.json
-    # userId = "PiedPipers"
+    body = request.json
+    userId = "PiedPipers"
 
-    # reserveUrl = 'http://213.233.176.40/rooms/' + \
-        # str(body['roomNumber']) + '/reserve'
-    # data = {
-    #     "username": userId,
-    #     "start": body['start'],
-    #     "end": body['end']
-
+    reserveUrl = 'http://213.233.176.40/rooms/' + \
+        str(body['roomNumber']) + '/reserve'
     data = {
-        "start": "2019-09-13T19:00:00",
-        "end": "2019-09-13T20:00:00",
-        "username": "rkhosravi"
+        "username": userId,
+        "start": body['start'],
+        "end": body['end']
     }
+
     headers = {'Content-Type': 'application/json'}
 
     try:
-        response = requests.post('http://213.233.176.40/rooms/457/reserve', data=json.dumps(data), headers=headers)
+        response = requests_retry_session().post(reserveUrl, data=json.dumps(data), headers=headers)
         return response.content, response.status_code
     except Exception as ex:
         print('It failed :(', ex.__class__.__name__)
