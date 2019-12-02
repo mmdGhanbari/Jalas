@@ -7,6 +7,7 @@ import {
   dispatchSetSelectedOption,
   dispatchSetSelectedRoom
 } from '../pollList/pollList.action'
+import { dispatchSetSnackbarMessage } from '../snackbar/snackbar.actions'
 // views
 import { getPollById } from '../../../logic/polls/polls.reducer'
 // requests
@@ -27,6 +28,10 @@ const mapStateToProps = (state, { id, status }) => {
 
 const mapDispatchToProps = (_, { id }) => ({
   onCreate: () => {
+    dispatchSetSnackbarMessage({
+      type: 'success',
+      message: 'hey you !!'
+    })
     const { startDate, endDate } = getState().view.pollList.selectedOption
     updatePoll(
       {
