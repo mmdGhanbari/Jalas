@@ -1,21 +1,27 @@
-from flask import Flask
-from db import insertPoll, getPolls
+from flask import Flask, request
+from db import insertPoll, getPoll, getUserPolls, getAll
 app = Flask(__name__)
 
 
-@app.route('/api/getPolls')
-def getPollsRouter():
-    return str(getPolls())
+@app.route('/api/getAllPolls')
+def getAllPolls():
+    polls = str(getAll())
+    return polls
 
 
-@app.route('/api/getUserPolls/<userId>')
-def getUserPollsRouter(userId):
-    return 'helloooo'
+@app.route('/api/getPoll/<name>')
+def getPollRouter(name):
+    return str(getPoll(name))
 
 
-@app.route('/api/insertPoll/<name>')
-def insertPollRouter(name):
-    insertPoll({
-        'name': name
-    })
+# @app.route('/api/getUserPolls/<userId>')
+# def getUserPollsRouter(userId):
+#     print(getUserPolls(userId))
+#     return 'helloooo'
+
+
+@app.route('/api/insertPoll', methods=['POST'])
+def insertPollRouter():
+    poll = request.json
+    insertPoll(poll)
     return 'seccess'
