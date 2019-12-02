@@ -2,9 +2,12 @@ from flask import Flask, request
 from db import insertPoll, getPoll, getUserPolls, getAll
 app = Flask(__name__)
 
+
 @app.route('/api/getAllPolls')
 def getAllPolls():
-    return str(getAll())
+    polls = str(getAll())
+    return polls
+
 
 @app.route('/api/getPoll/<name>')
 def getPollRouter(name):
