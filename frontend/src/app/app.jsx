@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 // components
 import AppBar from './components/appBar/appBar'
 import SideBar from './components/sideBar/sideBar'
-import Body from './components/body/body'
+import Body from './components/body/body.container'
 // style
 import './app.css'
 // setup

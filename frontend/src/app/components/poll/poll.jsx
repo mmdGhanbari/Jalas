@@ -1,11 +1,34 @@
 // modules
 import React from 'react'
 // components
-import Option from './components/option/option'
+import { withStyles } from '@material-ui/core/styles'
+import { Button } from '@material-ui/core'
+import Option from './components/option/option.container'
+// helpers
+import { toPersianNumber } from '../../../helper/date'
 // style
 import './poll.css'
 
-export default ({ name, status, options }) => {
+const MyButton = withStyles({
+  root: {
+    width: '100%',
+    height: '100%'
+  },
+  label: {
+    maxHeight: '35px'
+  }
+})(Button)
+
+export default ({
+  id,
+  name,
+  status,
+  options,
+  action,
+  reservingRoom,
+  disabledOptions,
+  onCreate
+}) => {
   const statusColor = status === 'done' ? '#4ecca3' : '#f6da63'
   return (
     <div className='poll'>
@@ -22,34 +45,33 @@ export default ({ name, status, options }) => {
         <p className='poll-name iranyekan'>{name}</p>
       </div>
       <div className='poll-options'>
-        <Option
-          id={'111'}
-          start={new Date()}
-          end={new Date()}
-          positive={10}
-          negative={4}
-          onClick={Function.prototype}
-        />
-        <Option
-          id={'222'}
-          start={new Date()}
-          end={new Date()}
-          positive={10}
-          negative={4}
-          onClick={Function.prototype}
-        />
-        <Option
-          id={'333'}
-          start={new Date()}
-          end={new Date()}
-          positive={10}
-          negative={4}
-          onClick={Function.prototype}
-        />
+        {options.map(option => (
+          <Option
+            key={option.id}
+            pollId={id}
+            disabled={disabledOptions}
+            {...option}
+          />
+        ))}
       </div>
-      {/* <div className='poll-actions'>
-        <p className='iranyekan'>ایجاد جلسه</p>
-      </div> */}
+
+      <div className='poll-actions' style={{ height: `${action ? 35 : 0}px` }}>
+        {action === 'create' ? (
+          <MyButton style={{ background: '#4ecca3' }} onClick={onCreate}>
+            <p className='poll-actions-text iranyekan'>ایجاد جلسه</p>
+          </MyButton>
+        ) : null}
+        {action === 'cancel' ? (
+          <div
+            className='poll-actions-content'
+            style={{ background: '#f6da63' }}
+          >
+            <p className='poll-actions-text iranyekan'>{`در حال رزرو اتاق ${toPersianNumber(
+              reservingRoom
+            )}`}</p>
+          </div>
+        ) : null}
+      </div>
     </div>
   )
 }

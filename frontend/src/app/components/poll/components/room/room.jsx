@@ -3,6 +3,8 @@ import React from 'react'
 // components
 import { withStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
+// helpers
+import { toPersianNumber } from '../../../../../helper/date'
 // style
 import './room.css'
 
@@ -12,7 +14,7 @@ const MyButton = withStyles({
   }
 })(Button)
 
-export default ({ roomNumber, selected }) => (
+export default ({ roomNumber, selected, onClick }) => (
   <MyButton
     style={{
       width: '60px',
@@ -24,10 +26,11 @@ export default ({ roomNumber, selected }) => (
       textTransform: 'none',
       padding: '0'
     }}
+    onClick={onClick}
   >
     <div className={`room ${selected ? 'room-selected' : ''}`}>
       <p className='iranyekan'>اتاق</p>
-      <p className='iranyekan room-number'>{roomNumber}</p>
+      <p className='iranyekan room-number'>{toPersianNumber(roomNumber)}</p>
     </div>
   </MyButton>
 )

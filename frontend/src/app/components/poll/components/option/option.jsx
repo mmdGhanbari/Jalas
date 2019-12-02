@@ -6,7 +6,7 @@ import { Button, Typography } from '@material-ui/core'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import Room from '../room/room'
+import Room from '../room/room.container'
 // helper
 import { formatTimeRange, toPersianNumber } from '../../../../../helper/date'
 // style
@@ -35,11 +35,24 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-export default ({ start, end, positive, negative, onClick }) => {
+export default ({
+  pollId,
+  startDate,
+  endDate,
+  positive,
+  negative,
+  rooms,
+  expanded,
+  disabled,
+  onChange
+}) => {
   const classes = useStyles()
   return (
     <ExpansionPanel
       classes={{ root: classes.innerPaper, expanded: classes.expanded }}
+      expanded={expanded}
+      onChange={onChange}
+      disabled={disabled}
     >
       <ExpansionPanelSummary
         aria-controls='panel1a-content'
@@ -61,7 +74,6 @@ export default ({ start, end, positive, negative, onClick }) => {
             padding: '0',
             borderRadius: 0
           }}
-          onClick={onClick}
         >
           <div className='option'>
             <div className='option-votes'>
@@ -83,18 +95,16 @@ export default ({ start, end, positive, negative, onClick }) => {
                 color: '#232931'
               }}
             >
-              {formatTimeRange(start, end)}
+              {formatTimeRange(startDate, endDate)}
             </Typography>
           </div>
         </MyButton>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails classes={{ root: classes.details }}>
         <div className='option-rooms'>
-          <Room roomNumber={801} />
-          <Room roomNumber={802} selected />
-          <Room roomNumber={803} />
-          <Room roomNumber={301} />
-          <Room roomNumber={401} />
+          {rooms.map(room => (
+            <Room key={room} pollId={pollId} roomNumber={room} />
+          ))}
         </div>
       </ExpansionPanelDetails>
     </ExpansionPanel>
