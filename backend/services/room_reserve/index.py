@@ -68,12 +68,6 @@
 #         print('It eventually worked', response.status_code)
 
 
-
-
-
-
-
-
 from flask import Flask, request
 import pymongo
 import requests
@@ -89,7 +83,7 @@ app = Flask(__name__)
 def requests_retry_session(
     retries=10,
     backoff_factor=0.3,
-    status_forcelist=(500, 502, 504, 408, 400, 404),
+    status_forcelist=(500, 502, 503, 504, 408, 400, 404),
     session=None,
 ):
     session = session or requests.Session()
@@ -133,8 +127,9 @@ def reserveRoom():
 
     while(True):
         try:
-            response = requests.post(reserveUrl, data=json.dumps(data), headers=headers, timeout=5)
-            if response.content == "Internal Server Error" or response.content == "Service Unavailable" : # 500 or 503
+            response = requests.post(reserveUrl, data=json.dumps(
+                data), headers=headers, timeout=5)
+            if response.content == "Internal Server Error" or response.content == "Service Unavailable":  # 500 or 503
                 continue
             return response.content, response.status_code
         except Timeout:

@@ -22,6 +22,7 @@ export default ({ roomNumber, selected, onClick }) => (
       borderRadius: '10px',
       overflow: 'hidden',
       marginLeft: '10px',
+      marginTop: '10px',
       cursor: 'pointer',
       textTransform: 'none',
       padding: '0'

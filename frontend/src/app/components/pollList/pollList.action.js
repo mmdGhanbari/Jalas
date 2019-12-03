@@ -8,3 +8,7 @@ export const dispatchSetSelectedOption = (...args) =>
 export const SET_SELECTED_ROOM = 'SET_SELECTED_ROOM'
 export const dispatchSetSelectedRoom = (...args) =>
   dispatch(createAction(SET_SELECTED_ROOM)(...args))
+
+export const SET_LOADING_ROOMS = 'SET_LOADING_ROOMS'
+export const dispatchSetLoadingRooms = (...args) =>
+  dispatch(createAction(SET_LOADING_ROOMS)(...args))

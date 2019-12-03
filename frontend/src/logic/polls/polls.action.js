@@ -8,3 +8,7 @@ export const dispatchUpdatePoll = (...args) =>
 export const SET_POLLS = 'SET_POLLS'
 export const dispatchSetPolls = (...args) =>
   dispatch(createAction(SET_POLLS)(...args))
+
+export const REMOVE_POLL = 'REMOVE_POLL'
+export const dispatchRemovePoll = (...args) =>
+  dispatch(createAction(REMOVE_POLL)(...args))

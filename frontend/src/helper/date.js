@@ -66,3 +66,5 @@ export const formatTimeRange = (start, end) => {
 
   return `${date} | ${endTime} - ${startTime}`
 }
+
+export const formatDate = date => moment(date).format('YYYY-MM-DDTHH:mm:ss')

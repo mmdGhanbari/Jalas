@@ -6,6 +6,7 @@ import { Button, Typography } from '@material-ui/core'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Room from '../room/room.container'
 // helper
 import { formatTimeRange, toPersianNumber } from '../../../../../helper/date'
@@ -31,7 +32,8 @@ const useStyles = makeStyles(() => ({
     marginTop: '0 !important'
   },
   details: {
-    padding: 0
+    padding: 0,
+    minHeight: 70
   }
 }))
 
@@ -44,6 +46,7 @@ export default ({
   rooms,
   expanded,
   disabled,
+  isLoading,
   onChange
 }) => {
   const classes = useStyles()
@@ -95,17 +98,25 @@ export default ({
                 color: '#232931'
               }}
             >
-              {formatTimeRange(startDate, endDate)}
+              {formatTimeRange(new Date(startDate), new Date(endDate))}
             </Typography>
           </div>
         </MyButton>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails classes={{ root: classes.details }}>
-        <div className='option-rooms'>
-          {rooms.map(room => (
-            <Room key={room} pollId={pollId} roomNumber={room} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className='option-loading'>
+            <CircularProgress style={{ color: '#232931' }} />
+          </div>
+        ) : rooms.length ? (
+          <div className='option-rooms'>
+            {rooms.map(room => (
+              <Room key={room} pollId={pollId} roomNumber={room} />
+            ))}
+          </div>
+        ) : (
+          <div className='no-rooms iranyekan'>اتاقی موجود نیست</div>
+        )}
       </ExpansionPanelDetails>
     </ExpansionPanel>
   )

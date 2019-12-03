@@ -63,7 +63,9 @@ const reducers = {
       state
     ),
 
-  SET_POLLS: (_, polls) => polls
+  SET_POLLS: (_, polls) => polls,
+
+  REMOVE_POLL: (state, id) => R.reject(R.propEq('id', id), state)
 }
 
 export default (state = initialState, { type, payload }) =>

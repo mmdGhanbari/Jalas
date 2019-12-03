@@ -1,4 +1,5 @@
-const initialState = [801, 802, 302, 305, 102]
+// const initialState = [801, 802, 302, 305, 102]
+const initialState = []
 
 const reducers = {
   SET_ROOMS: (state, rooms) => rooms

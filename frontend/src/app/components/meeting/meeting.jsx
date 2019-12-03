@@ -30,15 +30,19 @@ export default ({ title, room, startDate, endDate }) => {
           <div className='info-tag'>اتاق</div>
         </div>
         <div className='info-box'>
-          <p className='info-text'>{convertToPersianTime(endDate)}</p>
+          <p className='info-text'>{convertToPersianTime(new Date(endDate))}</p>
           <div className='info-tag'>پایان</div>
         </div>
         <div className='info-box'>
-          <p className='info-text'>{convertToPersianTime(startDate)}</p>
+          <p className='info-text'>
+            {convertToPersianTime(new Date(startDate))}
+          </p>
           <div className='info-tag'>شروع</div>
         </div>
         <div className='info-box'>
-          <p className='info-text'>{convertToPersianDate(startDate)}</p>
+          <p className='info-text'>
+            {convertToPersianDate(new Date(startDate))}
+          </p>
           <div className='info-tag'>تاریخ</div>
         </div>
       </div>

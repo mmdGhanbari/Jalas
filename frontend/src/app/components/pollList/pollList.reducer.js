@@ -3,7 +3,8 @@ const initialState = {
   selectedRoom: {
     number: null,
     pollId: null
-  }
+  },
+  loadingRooms: false
 }
 
 const reducers = {
@@ -12,7 +13,9 @@ const reducers = {
     selectedOption
   }),
 
-  SET_SELECTED_ROOM: (state, selectedRoom) => ({ ...state, selectedRoom })
+  SET_SELECTED_ROOM: (state, selectedRoom) => ({ ...state, selectedRoom }),
+
+  SET_LOADING_ROOMS: (state, loadingRooms) => ({ ...state, loadingRooms })
 }
 
 export default (state = initialState, { type, payload }) =>

@@ -9,7 +9,7 @@ app = Flask(__name__)
 def insertEventRouter():
     event = request.json
     insertEvent(event)
-    return
+    return 'success'
 
 
 @app.route('/api/getAllEvent', methods=['GET'])
