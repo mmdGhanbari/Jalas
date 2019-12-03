@@ -25,7 +25,7 @@ export const getAvailableRooms = (startDate, endDate) =>
       dispatchSetLoadingRooms(false)
       dispatchSetRooms(res.data.availableRooms)
     })
-    .catch(() => {
+    .catch(err => {
       dispatchSetSelectedOption(null)
       dispatchSetLoadingRooms(false)
       dispatchSetSnackbarMessage({
@@ -37,6 +37,7 @@ export const getAvailableRooms = (startDate, endDate) =>
 export const reserveRoom = ({ room: roomNumber, pollId, startDate, endDate }) =>
   post(`/reserve/api/reserveRoom`, {
     roomNumber,
+    userId: 'piedPipers',
     start: formatDate(startDate),
     end: formatDate(endDate)
   })
@@ -57,13 +58,17 @@ export const reserveRoom = ({ room: roomNumber, pollId, startDate, endDate }) =>
       )
       sendAnalytics('ًROOM_RESERVE', { roomNumber, startDate, endDate })
     })
-    .catch(() => {
+    .catch(err => {
+      const { status } = err.response
+      dispatchSetSnackbarMessage({
+        type: 'error',
+        message:
+          status === 404
+            ? 'اتاق انتخاب شده در دسترس نیست'
+            : 'سامانه رزرواسیون در دسترس نیست'
+      })
       updatePoll({
         _id: pollId,
         reservingRoom: null
-      })
-      dispatchSetSnackbarMessage({
-        type: 'error',
-        message: 'سامانه رزرواسیون در دسترس نیست'
       })
     })

@@ -37,8 +37,8 @@
     },
     {
       "name": "reserve",
-      "cwd": "./services/room_reserve",
-      "script": "python3 index.py",
+      "cwd": "./services/reserve/src",
+      "script": "index.js",
       "exec_mode": "fork",
       "instances": 1
     }
