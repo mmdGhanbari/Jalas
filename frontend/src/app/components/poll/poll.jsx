@@ -27,7 +27,8 @@ export default ({
   action,
   reservingRoom,
   disabledOptions,
-  onCreate
+  onCreate,
+  onCancel
 }) => {
   const statusColor = status === 'done' ? '#4ecca3' : '#f6da63'
   return (
@@ -65,6 +66,17 @@ export default ({
             className='poll-actions-content'
             style={{ background: '#f6da63' }}
           >
+            <MyButton
+              style={{
+                background: '#d65555',
+                width: 60,
+                height: 30,
+                marginRight: 10
+              }}
+              onClick={onCancel}
+            >
+              <p className='iranyekan poll-actions-cancel'>لغو</p>
+            </MyButton>
             <p className='poll-actions-text iranyekan'>{`در حال رزرو اتاق ${toPersianNumber(
               reservingRoom
             )}`}</p>

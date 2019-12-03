@@ -6,3 +6,5 @@ export const sendAnalytics = (type, data) =>
     data,
     time: new Date()
   })
+
+export const loadTime = new Date()

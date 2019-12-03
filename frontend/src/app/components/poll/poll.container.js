@@ -7,26 +7,22 @@ import {
   dispatchSetSelectedOption,
   dispatchSetSelectedRoom
 } from '../pollList/pollList.action'
-// views
-import { getPollById } from '../../../logic/polls/polls.reducer'
 // requests
 import { updatePoll } from '../../../logic/polls/polls.request'
-import { reserveRoom } from '../../../logic/rooms/rooms.request'
+import { reserveRoom, cancelReserve } from '../../../logic/rooms/rooms.request'
 // redux
 import { getState } from '../../../setup/redux'
 
-const mapStateToProps = (state, { id, status }) => {
-  const { reservingRoom } = getPollById(id)
+const mapStateToProps = (state, { id, status, reservingRoom }) => {
   const { pollId } = state.view.pollList.selectedRoom
 
   return {
-    reservingRoom,
     disabledOptions: status !== 'done' || !!reservingRoom,
     action: pollId === id ? 'create' : reservingRoom ? 'cancel' : ''
   }
 }
 
-const mapDispatchToProps = (_, { id }) => ({
+const mapDispatchToProps = (_, { id, reservingRoom }) => ({
   onCreate: () => {
     const { startDate, endDate } = getState().view.pollList.selectedOption
     const reservingRoom = getState().view.pollList.selectedRoom.number
@@ -47,7 +43,8 @@ const mapDispatchToProps = (_, { id }) => ({
           room: reservingRoom
         })
       )
-  }
+  },
+  onCancel: () => cancelReserve(id, reservingRoom)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Poll)

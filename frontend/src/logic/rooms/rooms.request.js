@@ -41,7 +41,9 @@ export const reserveRoom = ({ room: roomNumber, pollId, startDate, endDate }) =>
     start: formatDate(startDate),
     end: formatDate(endDate)
   })
-    .then(() => {
+    .then(res => {
+      if (res.data === 'cancelled') return
+
       const { name } = getPollById(pollId)
       dispatchRemovePoll(pollId)
       updatePoll({
@@ -72,3 +74,14 @@ export const reserveRoom = ({ room: roomNumber, pollId, startDate, endDate }) =>
         reservingRoom: null
       })
     })
+
+export const cancelReserve = (pollId, roomNumber) =>
+  post('/reserve/api/cancelReserve', { roomNumber })
+    .then(() => {
+      updatePoll({
+        _id: pollId,
+        reservingRoom: null
+      })
+      sendAnalytics('CANCEL_RESERVE', { pollId, roomNumber })
+    })
+    .catch(console.log)

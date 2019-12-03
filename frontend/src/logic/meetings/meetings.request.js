@@ -1,5 +1,5 @@
 import { get, post } from '../../setup/request'
-import { sendAnalytics } from '../analytics/analytics'
+import { sendAnalytics, loadTime } from '../analytics/analytics'
 // actions
 import { dispatchInsertMeeting, dispatchSetMeetings } from './meetings.action'
 import { dispatchSetSnackbarMessage } from '../../app/components/snackbar/snackbar.actions'
@@ -21,5 +21,10 @@ export const createMeeting = meeting =>
       })
       sendMeetingEmail(meeting.title)
     })
-    .then(() => sendAnalytics('CREATE_MEETING', meeting))
+    .then(() =>
+      sendAnalytics('CREATE_MEETING', {
+        ...meeting,
+        creatingDuration: new Date() - loadTime
+      })
+    )
     .catch(console.log)
