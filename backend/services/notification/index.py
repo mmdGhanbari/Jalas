@@ -20,7 +20,7 @@ def sendEmail():
     data = request.json
     msg = Message('Hello', sender='fatemeh.haghighi550@gmail.com',
                   recipients=['fatemeh.haghighi550@gmail.com'])
-    msg.body = data
+    msg.body = data['message']
     mail.send(msg)
     return "Sent"
 

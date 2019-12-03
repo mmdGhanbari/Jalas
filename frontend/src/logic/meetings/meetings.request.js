@@ -3,6 +3,8 @@ import { sendAnalytics } from '../analytics/analytics'
 // actions
 import { dispatchInsertMeeting, dispatchSetMeetings } from './meetings.action'
 import { dispatchSetSnackbarMessage } from '../../app/components/snackbar/snackbar.actions'
+// requests
+import { sendMeetingEmail } from '../notification/notification'
 
 export const getMeetings = () =>
   get('/meeting/api/getAllMeetings')
@@ -17,6 +19,7 @@ export const createMeeting = meeting =>
         type: 'success',
         message: 'جلسه با موفقیت ساخته شد'
       })
+      sendMeetingEmail(meeting.title)
     })
     .then(() => sendAnalytics('CREATE_MEETING', meeting))
     .catch(console.log)
