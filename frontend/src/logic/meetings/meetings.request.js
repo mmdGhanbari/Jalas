@@ -2,6 +2,7 @@ import { get, post } from '../../setup/request'
 import { sendAnalytics, loadTime } from '../analytics/analytics'
 // actions
 import { dispatchInsertMeeting, dispatchSetMeetings } from './meetings.action'
+import { dispatchSetMeeting } from '../../app/pages/meetingPage/meetingPage.action'
 import { dispatchSetSnackbarMessage } from '../../app/components/snackbar/snackbar.actions'
 // requests
 import { sendMeetingEmail } from '../notification/notification'
@@ -27,4 +28,9 @@ export const createMeeting = meeting =>
         creatingDuration: new Date() - loadTime
       })
     )
+    .catch(console.log)
+
+export const getMeetingById = meetingId =>
+  get(`/meeting/api/getMeetingById/${meetingId}`)
+    .then(res => res.data)
     .catch(console.log)

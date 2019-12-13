@@ -27,6 +27,11 @@ export const getPolls = () =>
     .then(res => dispatchSetPolls(R.map(makePoll, res.data)))
     .catch(console.log)
 
+export const getPollById = pollId =>
+  get(`/poll/api/getPollById/${pollId}`)
+    .then(res => makePoll(res.data))
+    .catch(console.log)
+
 export const updatePoll = poll =>
   post('/poll/api/updatePoll', poll)
     .then(() => dispatchUpdatePoll({ ...poll, id: poll._id }))

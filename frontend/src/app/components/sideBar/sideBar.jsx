@@ -22,8 +22,8 @@ const MyButton = withStyles({
 export default ({ page, setPage }) => (
   <div className='side-bar'>
     <MyButton
-      style={{ marginLeft: `${page === 'create' ? -15 : 15}px` }}
-      onClick={Function.prototype}
+      style={{ marginLeft: `${page === 'newPoll' ? -15 : 15}px` }}
+      onClick={() => setPage('newPoll')}
     >
       <p className='iranyekan side-bar-text'>ایجاد نظرسنجی</p>
     </MyButton>

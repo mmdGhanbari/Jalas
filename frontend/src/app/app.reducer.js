@@ -3,6 +3,8 @@ import { combineReducers } from 'redux'
 // reducers
 import pollListReducer from './components/pollList/pollList.reducer'
 import snackBarReducer from './components/snackbar/snackbar.reducer'
+import meetingPageReducer from './pages/meetingPage/meetingPage.reducer'
+import votePageReducer from './pages/votePage/votePage.reducer'
 
 const initialState = {
   page: 'polls' // create, polls, meetings
@@ -18,5 +20,7 @@ const appReducer = (state = initialState, { type, payload }) =>
 export default combineReducers({
   app: appReducer,
   pollList: pollListReducer,
-  snackbar: snackBarReducer
+  snackbar: snackBarReducer,
+  meetingPage: meetingPageReducer,
+  votePage: votePageReducer
 })
